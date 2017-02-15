@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace HomeWork2
 {
-    class MyHomework : object
+    public class MyHomework : object
     {
         private int _myNumValue;
 
         private const int MyConstValue = int.MaxValue;
         public string MyTxtValue { get; private set; }
         public bool MyBoolValue { get; set; }
+        public enum Enums { };
 
         public void SetMyNumValue()
         {
@@ -23,19 +24,38 @@ namespace HomeWork2
             _myNumValue = numValue;
         }
 
-        public void MyHelperMethod()
+        public string MyHelperMetho()
         {
-            string txtValue;
-            Console.WriteLine("Enter somethint");
-            txtValue = Console.ReadLine();
-
-            return;
+            Console.WriteLine("Enter something");
+            string txtValue = Console.ReadLine();
+            string output = new string(txtValue.ToCharArray().Reverse().ToArray());
+            return output;
         }
 
-        public void MyPolyMethod()
+        public dynamic MyPolyMethod()
         {
-            string[] randomStrings;
+            string[] randomStrings = new string[20];
+            for (int i = 0; i < randomStrings.Length; i++)
+            {
+                randomStrings[i] = Console.ReadLine();
+            }
+            IEnumerable<Enums> items = randomStrings.Select(a => (Enums)Enum.Parse(typeof(Enums), a));
+            return items;
+        }
 
+        public static bool Shorten(string text, int n, out bool result)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                result = false;
+            }
+
+            else
+            {
+                text.Substring(0, Math.Min(text.Length, n));
+                result = true;
+            }
+            return result;
         }
     }
 }
